@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who We Are — Desert Clam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--void:#08080a;--deep:#12100e;--sand:#c4a87a;--sand-pale:#e8d8b8;--rust:#9B4A1C;--rust-light:#c46a35;--sage:#5a7a3e;--sage-light:#7a9a58;--bone:#f0e8d5;--muted:rgba(240,232,213,0.6);--dim:rgba(240,232,213,0.35);--ochre:#b8872a;--ochre-pale:#d8a84a;--teal:#3a7070;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--void);color:var(--bone);font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.8;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(8,8,10,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,168,122,0.12);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.95rem;letter-spacing:0.2em;color:var(--ochre);text-decoration:none;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-links a{padding:0.3rem 0.7rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all 0.2s;text-transform:uppercase;}
+.nav-links a:hover,.nav-links a.active{color:var(--ochre-pale);border-color:rgba(196,168,122,0.25);background:rgba(196,168,122,0.06);}
+.page-hero{padding:8rem 2rem 4rem;text-align:center;max-width:800px;margin:0 auto;}
+.page-eyebrow{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:1rem;}
+.page-title{font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;color:var(--bone);margin-bottom:1rem;line-height:1.1;}
+.page-sub{font-size:1.1rem;color:var(--sand);font-style:italic;max-width:580px;margin:0 auto;}
+.section{padding:4rem 2rem;max-width:1060px;margin:0 auto;}
+.section-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.75rem;}
+h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--bone);margin-bottom:1.5rem;}
+h3{font-family:'Cinzel',serif;font-size:1rem;font-weight:400;color:var(--ochre-pale);margin-bottom:0.5rem;}
+p{color:var(--muted);margin-bottom:1rem;}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,122,0.2),transparent);}
+
+.people-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem;}
+.person-card{background:rgba(12,10,8,0.9);border:1px solid rgba(196,168,122,0.1);border-radius:10px;padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;}
+.person-card:hover{border-color:rgba(196,168,122,0.3);}
+.person-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0.5;}
+.pc-founder::before{background:linear-gradient(to right,transparent,var(--rust-light),transparent);}
+.pc-builder::before{background:linear-gradient(to right,transparent,var(--ochre),transparent);}
+.pc-healer::before{background:linear-gradient(to right,transparent,var(--sage-light),transparent);}
+.pc-elder::before{background:linear-gradient(to right,transparent,var(--teal),transparent);}
+.person-icon{font-size:2rem;margin-bottom:1rem;display:block;}
+.person-role{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.4rem;display:block;}
+.person-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--bone);margin-bottom:0.75rem;}
+.person-desc{font-size:0.88rem;color:var(--dim);line-height:1.7;}
+.person-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:1rem;}
+.ptag{padding:0.15rem 0.6rem;border:1px solid rgba(196,168,122,0.15);border-radius:12px;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.08em;color:rgba(196,168,122,0.6);}
+
+.neurodivergent-box{background:rgba(90,122,62,0.08);border:1px solid rgba(90,122,62,0.2);border-radius:8px;padding:2rem;margin-top:2rem;}
+.nb-title{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--sage-light);text-transform:uppercase;margin-bottom:0.75rem;}
+.nb-text{font-size:0.95rem;color:var(--muted);line-height:1.8;font-style:italic;}
+
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem;margin-top:1.5rem;}
+.tool-item{background:rgba(18,16,14,0.8);border:1px solid rgba(196,168,122,0.08);border-radius:6px;padding:1rem;font-size:0.85rem;color:var(--dim);}
+.tool-item strong{display:block;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:var(--ochre-pale);margin-bottom:0.25rem;}
+
+footer{border-top:1px solid rgba(196,168,122,0.08);padding:2.5rem 2rem;text-align:center;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--dim);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">◈ Desert Clam</a>
+  <div class="nav-links">
+    <a href="index.html">Vision</a>
+    <a href="who.html" class="active">Who We Are</a>
+    <a href="build.html">What We Build</a>
+    <a href="land.html">The Land We Seek</a>
+    <a href="covenant.html">Covenant</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-eyebrow">The People</div>
+  <h1 class="page-title">Who We Are</h1>
+  <p class="page-sub">Multi-generational. Neurodivergent. Skilled. We did not recruit each other. We found each other — which is different.</p>
+</div>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">The Founding Group</div>
+  <h2>Complementary by accident.<br>Formidable by design.</h2>
+  <p>Between us we hold the skills required to build, heal, grow, govern, create, and sustain a living community from the ground up. We are not a collection of dreamers. We are a construction engineer, a community architect, a medical professional, a cook, a farmer, a mother, a builder, and a healer who happen to share a vision of what life can look like when it is built with intention.</p>
+
+  <div class="people-grid">
+
+    <div class="person-card pc-founder">
+      <span class="person-icon">🧭</span>
+      <span class="person-role">Community Architect · Founding Steward</span>
+      <div class="person-title">The Designer</div>
+      <p class="person-desc">Permaculture designer and systems thinker with a farming background and a deep understanding of how communities succeed and fail. Wrote the blueprint, the constitution, and the vision. Holds the long view. Remote income from day one. Trained animals that reflect her groundedness.</p>
+      <div class="person-tags">
+        <span class="ptag">Permaculture</span>
+        <span class="ptag">Community Design</span>
+        <span class="ptag">Writing</span>
+        <span class="ptag">Animal Husbandry</span>
+        <span class="ptag">Remote Income</span>
+        <span class="ptag">Systems Thinking</span>
+      </div>
+    </div>
+
+    <div class="person-card pc-healer">
+      <span class="person-icon">🌿</span>
+      <span class="person-role">Medical + Holistic Director</span>
+      <div class="person-title">The Healer</div>
+      <p class="person-desc">Medical and holistic degrees. Founded a nonprofit around a specific genetic mutation affecting community members. Deeply communicative, health-protocol driven, and committed to building an environment where the body can heal rather than merely cope. The community's medical intelligence.</p>
+      <div class="person-tags">
+        <span class="ptag">Medical Credentials</span>
+        <span class="ptag">Holistic Health</span>
+        <span class="ptag">Nonprofit Founder</span>
+        <span class="ptag">Protocol Design</span>
+        <span class="ptag">Communication</span>
+      </div>
+    </div>
+
+    <div class="person-card pc-builder">
+      <span class="person-icon">🏗</span>
+      <span class="person-role">Construction Engineering · Operations</span>
+      <div class="person-title">The Builder</div>
+      <p class="person-desc">Professional construction engineer with quality tools and a cooperative disposition. Capable of translating vision into structure — the person who knows not just what to build but how. Currently recovering from environmental toxin exposure sustained in a wildfire event. Kind, capable, and ready.</p>
+      <div class="person-tags">
+        <span class="ptag">Construction Engineering</span>
+        <span class="ptag">Professional Tools</span>
+        <span class="ptag">Project Management</span>
+        <span class="ptag">Cooperative</span>
+      </div>
+    </div>
+
+    <div class="person-card pc-elder">
+      <span class="person-icon">🍳</span>
+      <span class="person-role">Culinary · Physical Labor</span>
+      <div class="person-title">The Cook</div>
+      <p class="person-desc">Handles most of the communal cooking with skill and care. Physically strong. Kind and directed. Comfortable with physical labor and brings consistency and warmth to the shared table — which is the center of any real community.</p>
+      <div class="person-tags">
+        <span class="ptag">Communal Cooking</span>
+        <span class="ptag">Physical Labor</span>
+        <span class="ptag">Reliability</span>
+        <span class="ptag">Warmth</span>
+      </div>
+    </div>
+
+    <div class="person-card pc-founder">
+      <span class="person-icon">👩‍👧</span>
+      <span class="person-role">Family · Animals · Intentional Living</span>
+      <div class="person-title">The Mother</div>
+      <p class="person-desc">26 years old, raising a 2-year-old daughter with screen-free intentionality, deep empathy, and a clear vision of what she wants her child's world to look like. Brings respect for animals, genuine warmth, and the quiet authority of someone who has already made the hard choices about how to live.</p>
+      <div class="person-tags">
+        <span class="ptag">Intentional Parenting</span>
+        <span class="ptag">Animal Care</span>
+        <span class="ptag">Screen-Free Living</span>
+        <span class="ptag">Empathy</span>
+      </div>
+    </div>
+
+    <div class="person-card pc-builder">
+      <span class="person-icon">🌱</span>
+      <span class="person-role">Labor · Adaptable Contribution</span>
+      <div class="person-title">The Steady One</div>
+      <p class="person-desc">Capable of significant physical contribution when given clear direction. Kind, vocal, present. Brings the kind of reliable labor that keeps a land project moving — the person who shows up every day and does the work without drama.</p>
+      <div class="person-tags">
+        <span class="ptag">Physical Labor</span>
+        <span class="ptag">Reliability</span>
+        <span class="ptag">Adaptable</span>
+        <span class="ptag">Consistent</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="neurodivergent-box" style="margin-top:2rem;">
+    <div class="nb-title">On Neurodivergence</div>
+    <p class="nb-text">Several members of Desert Clam are neurodivergent. We name this not as a liability but as a design feature. Neurodivergent minds built most of the interesting things in human history — because they notice what others overlook, make connections others miss, and refuse to accept that the way things are is the way things must be. A community of neurodivergent people growing their own food and building their own systems is not a risk. It is what happens when the people who think differently finally have a container that fits them.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">What We Arrive With</div>
+  <h2>Tools, credentials,<br>and a two-year-old.</h2>
+  <p>We are not arriving empty-handed. Between the group we bring:</p>
+  <div class="tools-grid">
+    <div class="tool-item"><strong>Professional Construction Tools</strong>Full set owned and maintained by the engineer.</div>
+    <div class="tool-item"><strong>Existing Nonprofit</strong>Legal entity already established. Grant-eligible from day one.</div>
+    <div class="tool-item"><strong>Remote Income</strong>Stable monthly income that travels with us.</div>
+    <div class="tool-item"><strong>Complete Blueprint</strong>Full regenerative community design, ready to execute.</div>
+    <div class="tool-item"><strong>Community Constitution</strong>Written governance framework. We know how to make decisions together.</div>
+    <div class="tool-item"><strong>Medical Knowledge</strong>Holistic health protocols embedded in how we eat, build, and live.</div>
+    <div class="tool-item"><strong>Trained Animals</strong>A husky and a cat. Well-behaved. Part of the community.</div>
+    <div class="tool-item"><strong>Permaculture Design</strong>Complete food forest plan, water harvesting design, soil building protocol.</div>
+    <div class="tool-item"><strong>Construction Expertise</strong>We can build what we design. That is not common.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  DESERT CLAM · WHO WE ARE<br><br>
+  <a href="index.html" style="color:rgba(196,168,122,0.4);text-decoration:none;letter-spacing:0.15em;">← BACK TO VISION</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Build — Desert Clam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--void:#08080a;--sand:#c4a87a;--sand-pale:#e8d8b8;--rust:#9B4A1C;--rust-light:#c46a35;--sage:#5a7a3e;--sage-light:#7a9a58;--bone:#f0e8d5;--muted:rgba(240,232,213,0.6);--dim:rgba(240,232,213,0.35);--ochre:#b8872a;--ochre-pale:#d8a84a;--sky:#4a7a8a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--void);color:var(--bone);font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.8;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(8,8,10,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,168,122,0.12);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.95rem;letter-spacing:0.2em;color:var(--ochre);text-decoration:none;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-links a{padding:0.3rem 0.7rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all 0.2s;text-transform:uppercase;}
+.nav-links a:hover,.nav-links a.active{color:var(--ochre-pale);border-color:rgba(196,168,122,0.25);background:rgba(196,168,122,0.06);}
+.page-hero{padding:8rem 2rem 4rem;text-align:center;max-width:800px;margin:0 auto;}
+.page-eyebrow{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:1rem;}
+.page-title{font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;color:var(--bone);margin-bottom:1rem;line-height:1.1;}
+.page-sub{font-size:1.1rem;color:var(--sand);font-style:italic;max-width:580px;margin:0 auto;}
+.section{padding:4rem 2rem;max-width:1060px;margin:0 auto;}
+.section-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.75rem;}
+h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--bone);margin-bottom:1.5rem;}
+h3{font-family:'Cinzel',serif;font-size:1rem;font-weight:400;color:var(--ochre-pale);margin-bottom:0.75rem;}
+p{color:var(--muted);margin-bottom:1rem;}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,122,0.2),transparent);}
+
+/* LOOP */
+.loop-wrap{background:rgba(12,10,8,0.9);border:1px solid rgba(196,168,122,0.1);border-radius:12px;padding:2.5rem;margin-top:2rem;}
+.loop-label{text-align:center;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.3em;color:rgba(196,168,122,0.5);text-transform:uppercase;margin-bottom:2rem;}
+.loop-node{cursor:pointer;transition:opacity 0.2s;}
+.loop-node:hover{opacity:0.75;}
+.node-detail{margin-top:1.5rem;background:rgba(8,8,10,0.95);border:1px solid rgba(196,168,122,0.15);border-radius:8px;padding:1.5rem;display:none;}
+.node-detail.show{display:block;animation:fadeIn 0.2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.nd-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--ochre-pale);margin-bottom:0.5rem;}
+.nd-body{font-size:0.9rem;color:var(--dim);line-height:1.75;}
+.nd-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.75rem;}
+.nd-tag{padding:0.15rem 0.6rem;border:1px solid rgba(196,168,122,0.15);border-radius:12px;font-size:0.7rem;color:rgba(196,168,122,0.6);font-family:'Cinzel',serif;letter-spacing:0.06em;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem;margin-top:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--ochre),var(--sage),var(--sky),transparent);}
+.tl-item{position:relative;padding:1.5rem 0 1.5rem 2rem;border-bottom:1px solid rgba(196,168,122,0.06);}
+.tl-item:last-child{border-bottom:none;}
+.tl-dot{position:absolute;left:-0.45rem;top:1.85rem;width:12px;height:12px;border-radius:50%;border:2px solid var(--ochre);background:var(--void);}
+.tl-phase{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.25rem;}
+.tl-title{font-family:'Cinzel',serif;font-size:0.95rem;color:var(--bone);margin-bottom:0.5rem;}
+.tl-desc{font-size:0.88rem;color:var(--dim);line-height:1.7;}
+.tl-cost{display:inline-block;margin-top:0.4rem;padding:0.12rem 0.6rem;border:1px solid rgba(196,168,122,0.2);border-radius:12px;font-family:'Cinzel',serif;font-size:0.58rem;color:var(--ochre-pale);}
+
+/* REVENUE */
+.rev-table{width:100%;border-collapse:collapse;margin-top:1.5rem;}
+.rev-table th{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--ochre);padding:0.6rem 1rem;border-bottom:1px solid rgba(196,168,122,0.2);text-align:left;text-transform:uppercase;background:rgba(196,168,122,0.03);}
+.rev-table td{padding:0.6rem 1rem;font-size:0.88rem;color:var(--dim);border-bottom:1px solid rgba(255,255,255,0.03);}
+.rev-table tr:last-child td{color:var(--ochre-pale);border-top:1px solid rgba(196,168,122,0.15);border-bottom:none;font-weight:600;}
+
+footer{border-top:1px solid rgba(196,168,122,0.08);padding:2.5rem 2rem;text-align:center;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--dim);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">◈ Desert Clam</a>
+  <div class="nav-links">
+    <a href="index.html">Vision</a>
+    <a href="who.html">Who We Are</a>
+    <a href="build.html" class="active">What We Build</a>
+    <a href="land.html">The Land We Seek</a>
+    <a href="covenant.html">Covenant</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-eyebrow">Blueprint</div>
+  <h1 class="page-title">What We Build</h1>
+  <p class="page-sub">A living system. Not a housing arrangement. Every output feeds the next input. Click any node.</p>
+</div>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">The Closed Loop</div>
+  <h2>Every system feeds the next</h2>
+  <div class="loop-wrap">
+    <div class="loop-label">Click any node to see what it produces and what feeds it</div>
+    <svg viewBox="0 0 520 460" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="a" markerWidth="7" markerHeight="7" refX="3.5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L7,3 z" fill="rgba(196,168,122,0.5)"/>
+        </marker>
+      </defs>
+      <text x="260" y="218" text-anchor="middle" font-family="Cinzel,serif" font-size="10" fill="rgba(196,168,122,0.4)" letter-spacing="2">CLOSED</text>
+      <text x="260" y="232" text-anchor="middle" font-family="Cinzel,serif" font-size="10" fill="rgba(196,168,122,0.4)" letter-spacing="2">LOOP</text>
+      <circle cx="260" cy="225" r="50" fill="none" stroke="rgba(196,168,122,0.06)" stroke-width="1"/>
+      <!-- Arrows -->
+      <path d="M291,65 Q345,78 363,100" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M420,138 Q432,178 430,205" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M428,255 Q418,295 402,320" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M365,358 Q320,378 298,388" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M224,390 Q185,376 165,360" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M100,325 Q82,292 82,262" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M85,205 Q96,165 114,142" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <path d="M155,100 Q202,72 232,62" fill="none" stroke="rgba(196,168,122,0.35)" stroke-width="1.5" marker-end="url(#a)"/>
+      <!-- Nodes -->
+      <g class="loop-node" data-n="goats" transform="translate(260,52)" style="cursor:pointer">
+        <circle r="36" fill="rgba(155,74,28,0.2)" stroke="rgba(155,74,28,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🐐</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">GOATS</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">dairy · clearing</text>
+      </g>
+      <g class="loop-node" data-n="compost" transform="translate(395,118)" style="cursor:pointer">
+        <circle r="36" fill="rgba(90,122,62,0.2)" stroke="rgba(90,122,62,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">♻️</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">COMPOST</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">fungal · zero waste</text>
+      </g>
+      <g class="loop-node" data-n="soil" transform="translate(448,230)" style="cursor:pointer">
+        <circle r="36" fill="rgba(100,60,20,0.2)" stroke="rgba(100,60,20,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🌾</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">SOIL</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">hugels · swales</text>
+      </g>
+      <g class="loop-node" data-n="forest" transform="translate(390,345)" style="cursor:pointer">
+        <circle r="36" fill="rgba(45,74,30,0.2)" stroke="rgba(45,74,30,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🌳</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">FOOD FOREST</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">8 layers · staple crops</text>
+      </g>
+      <g class="loop-node" data-n="kitchen" transform="translate(260,405)" style="cursor:pointer">
+        <circle r="36" fill="rgba(160,80,20,0.2)" stroke="rgba(160,80,20,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🔥</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">KITCHEN</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">cheese · ferment</text>
+      </g>
+      <g class="loop-node" data-n="aqua" transform="translate(130,345)" style="cursor:pointer">
+        <circle r="36" fill="rgba(30,70,100,0.2)" stroke="rgba(30,70,100,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🐟</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">AQUAPONICS</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">fish · pond gardens</text>
+      </g>
+      <g class="loop-node" data-n="greenhouse" transform="translate(72,230)" style="cursor:pointer">
+        <circle r="36" fill="rgba(50,100,50,0.2)" stroke="rgba(50,100,50,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🌿</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">GREENHOUSE</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">hydro · microgreens</text>
+      </g>
+      <g class="loop-node" data-n="mushrooms" transform="translate(128,118)" style="cursor:pointer">
+        <circle r="36" fill="rgba(80,50,100,0.2)" stroke="rgba(80,50,100,0.5)" stroke-width="1.5"/>
+        <text y="-6" text-anchor="middle" font-size="16">🍄</text>
+        <text y="10" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#d8a84a" letter-spacing="1">MUSHROOMS</text>
+        <text y="21" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7.5" fill="rgba(240,232,213,0.45)">below grade tunnel</text>
+      </g>
+    </svg>
+
+    <div id="nd" class="node-detail">
+      <div class="nd-title" id="nd-title"></div>
+      <div class="nd-body" id="nd-body"></div>
+      <div class="nd-tags" id="nd-tags"></div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:var(--dim);font-family:'Cinzel',serif;letter-spacing:0.1em;margin-top:1rem;">Click any node · Every output feeds the next input</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">Build Sequence</div>
+  <h2>Timeline + Costs</h2>
+  <p>All costs reflect DIY construction, barter, WWOOF labor, and on-site materials. Cash outlay is hardware, fixtures, and permits only.</p>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Before Day 1</div><div class="tl-title">Legal Foundation</div><div class="tl-desc">Attorney-reviewed land agreement signed · ADWR water rights confirmed · independent water testing complete · WWOOF USA listed · EQIP pre-application filed</div><span class="tl-cost">$1,500–3,000 attorney · $0 ADWR</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--rust-light)"></div><div class="tl-phase">Week 1–3</div><div class="tl-title">WWOOF Housing + Fencing</div><div class="tl-desc">Volunteer housing established · listed on WWOOF · paddock fencing from on-site materials · first volunteers arrive Week 4–6</div><span class="tl-cost">$3,000–7,000</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--sage-light)"></div><div class="tl-phase">Month 1–2</div><div class="tl-title">Water + Kitchen + Mule</div><div class="tl-desc">Swales and crescent pools along wash · communal kitchen: stone, clay, juniper, wood-fired oven, fermentation alcove, cheesemaking-capable · mule acquired</div><span class="tl-cost">$5,000–12,000</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--ochre)"></div><div class="tl-phase">Month 2–5</div><div class="tl-title">Earth Dome Phase 1</div><div class="tl-desc">Site at higher elevation · earthbag shell · buried under composted soil · hobbit door entry · loft mezzanine · aquaponics rough-in · rocket mass heater · greenhouse via earth berm corridor</div><span class="tl-cost">$35,000–52,000</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--sky)"></div><div class="tl-phase">Month 3–6</div><div class="tl-title">Mushroom Tunnel + Greenhouse + Apiary</div><div class="tl-desc">Below-grade tunnel producing · vertical hydroponics online · EQIP filed (50% greenhouse offset) · 2–4 hives</div><span class="tl-cost">$9,000–18,000 net after EQIP</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--sage)"></div><div class="tl-phase">Month 6–12</div><div class="tl-title">Studios + Forge + Floating Structures</div><div class="tl-desc">Art studio (north-lit adobe) · maintenance shop + forge · pottery studio under grape canopy · treehouse along wash · elevated sleeping pods · floating meditation platform on pond</div><span class="tl-cost">$10,000–22,000</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--ochre-pale)"></div><div class="tl-phase">Year 2–3</div><div class="tl-title">Vineyard + Resident Homes + Speaking</div><div class="tl-desc">Native grape vineyard established · first permanent residents invited · resident homes built to individual specification · first speaking engagement · intentional community app prototype</div><span class="tl-cost">Year 2 revenue funds Year 2 builds</span></div>
+    <div class="tl-item"><div class="tl-dot" style="border-color:var(--sage-light)"></div><div class="tl-phase">Year 5–7</div><div class="tl-title">Closed Loop Achieved</div><div class="tl-desc">Food forest mature · community self-sustaining · external revenue optional · teaching model documented · individual parcel purchases begin</div><span class="tl-cost">External income optional</span></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">Revenue Path</div>
+  <h2>How we sustain ourselves</h2>
+  <table class="rev-table">
+    <thead><tr><th>Stream</th><th>Year 1</th><th>Year 3</th></tr></thead>
+    <tbody>
+      <tr><td>Dairy + artisan cheese</td><td>$18–28k</td><td>$35–55k</td></tr>
+      <tr><td>Land clearing (goat rental)</td><td>$8–16k</td><td>$18–30k</td></tr>
+      <tr><td>Culinary mushrooms</td><td>$13k</td><td>$48–73k</td></tr>
+      <tr><td>HipCamp + artist retreats</td><td>$12–20k</td><td>$50–85k</td></tr>
+      <tr><td>Microgreens + herbs + flowers</td><td>$8–12k</td><td>$18–28k</td></tr>
+      <tr><td>Honey + beeswax products</td><td>$2–4k</td><td>$6–10k</td></tr>
+      <tr><td>Grants (EQIP, REAP, VAPG, SARE)</td><td>$25–50k</td><td>$35–65k</td></tr>
+      <tr><td>Pottery + art + ironwork</td><td>—</td><td>$14–28k</td></tr>
+      <tr><td>Teaching + speaking tours</td><td>—</td><td>$10–25k</td></tr>
+      <tr><td>Remote income (existing)</td><td>$9.6k</td><td>$9.6k+</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>~$96–143k</strong></td><td><strong>~$244–399k</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  DESERT CLAM · WHAT WE BUILD<br><br>
+  <a href="index.html" style="color:rgba(196,168,122,0.4);text-decoration:none;letter-spacing:0.15em;">← BACK TO VISION</a>
+</footer>
+
+<script>
+const data = {
+  goats:{title:'🐐 Goat Operation',body:'Dairy goats are the agricultural anchor. They produce the milk that becomes cheese, kefir, and yogurt. They clear the land, reducing fire risk. Their manure feeds every soil system on the property. In return, community labor earns a formal share of dairy and cheese income — the oldest labor arrangement in agriculture.',tags:['Milk → Cheese','Manure → Compost','Land Clearing → Fire Safety','Revenue Share']},
+  compost:{title:'♻️ Fungal Composting Hub',body:'Nothing leaves as waste. Goat manure, kitchen scraps, spent mushroom substrate, and wood chips enter a six-barrel fungal composting system. Mycelium breaks it down faster and richer than bacterial composting. Charged biochar from the forge pit soaks in pond water, then goes into the mix. The result feeds every growing system.',tags:['Goat Manure In','Spent Substrate In','Rich Compost Out','Biochar Charging']},
+  soil:{title:'🌾 Soil + Hugelkultur',body:'In a climate with 11 inches of annual rainfall, the soil system is everything. Buried juniper wood beds (hugelkultur) act as underground water batteries — reducing irrigation need by 60–80% once established. On-contour swales catch monsoon rain and direct it to the food forest. Olla clay pots buried at root zone replace drip irrigation entirely.',tags:['Hugels: Buried Water Battery','Swales: Rain Harvesting','Olla Irrigation: $0 Year 2','No Purchased Fertilizer Year 2+']},
+  forest:{title:'🌳 Food Forest — Full Caloric Coverage',body:'Eight layers of food production, chosen specifically for high-desert conditions. Staple calories: Hopi blue corn, tepary bean (driest legume on Earth), acorn squash, Jerusalem artichoke, Arizona walnut, amaranth grain, Sonora White wheat, quinoa. Vegetables: chard, kale, garlic, onion, comfrey, lamb\'s quarters. Fruit: serviceberry, native wolfberry/goji, gooseberry, fig, native strawberry. Medicine: mullein, yarrow, echinacea, lavender, sage. Everything self-seeding after Year 2.',tags:['Staple Calories','Vegetables','Fruit + Nut','Grain + Fiber','Medicine','Nitrogen Fixers']},
+  kitchen:{title:'🔥 Communal Kitchen',body:'The heart of the property. Stone, clay, juniper timber, wood-fired oven. Large enough for cheesemaking, communal meals for 20+, fermentation, and teaching workshops. Zero waste: whey feeds animals, scraps feed compost, ash from fire becomes soil amendment and lye for soap. Arizona Cottage Food certified for direct cheese and value-added sales.',tags:['Cheesemaking','Lacto-Fermentation','Zero Waste Kitchen','Cottage Food Licensed','Teaching Space']},
+  aqua:{title:'🐟 Aquaponics + Pond Gardens',body:'Fish tanks in the dome lower level, visible through floor panels. Fish waste feeds kitchen herb growbeds above. Plants filter water back to fish. Edge-based chinampa garden rafts in the main pond grow watercress, mint, chard, kale, cattails, and duck potato. Floating gardens shade the water, reducing evaporation — critical in an arid climate.',tags:['Fish → Plant Nutrition','Plants → Clean Water','Chinampa Rafts','Evaporation Reduction','Duck Potato + Cattail']},
+  greenhouse:{title:'🌿 Greenhouse + Hydroponics',body:'Extends the growing season at elevation where winters are real. Vertical hydroponic towers produce microgreens on 14-day cycles year-round. Perennial herbs in large containers. Dwarf citrus, cherry tomatoes, cucumbers off-season. The dome greenhouse also serves as a solar heat battery in winter and a graywater biofilter year-round.',tags:['Microgreens: 14-Day Cycle','Year-Round Herbs','Graywater Biofilter','Solar Heat Battery','$8–15k Annual Revenue']},
+  mushrooms:{title:'🍄 Below-Grade Mushroom Tunnel',body:'Excavated into a slope. Earth insulation maintains 55–60°F without power. Oyster, lion\'s mane, shiitake, reishi, king oyster produced year-round. Spent substrate feeds the goats and enriches the compost hub. Wine cap mushrooms inoculated into hugelkultur beds and wood chip paths. Revenue starts Month 4.',tags:['Oyster + Lion\'s Mane + Shiitake','$13k Year 1 · $48k+ Year 3','Spent Substrate → Goat Feed','Wine Cap in Hugels','No External Substrate Year 2+']}
+};
+document.querySelectorAll('.loop-node').forEach(n=>{
+  n.addEventListener('click',function(){
+    const k=this.getAttribute('data-n'),d=data[k];
+    if(!d)return;
+    const panel=document.getElementById('nd');
+    document.getElementById('nd-title').textContent=d.title;
+    document.getElementById('nd-body').textContent=d.body;
+    document.getElementById('nd-tags').innerHTML=d.tags.map(t=>`<span class="nd-tag">${t}</span>`).join('');
+    panel.classList.add('show');
+    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+});
+</script>
+</body>
+</html>

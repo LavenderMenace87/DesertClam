@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Land We Seek — Desert Clam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--void:#08080a;--sand:#c4a87a;--sand-pale:#e8d8b8;--rust:#9B4A1C;--rust-light:#c46a35;--sage:#5a7a3e;--sage-light:#7a9a58;--bone:#f0e8d5;--muted:rgba(240,232,213,0.6);--dim:rgba(240,232,213,0.35);--ochre:#b8872a;--ochre-pale:#d8a84a;--teal:#3a7070;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--void);color:var(--bone);font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.8;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(8,8,10,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,168,122,0.12);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.95rem;letter-spacing:0.2em;color:var(--ochre);text-decoration:none;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-links a{padding:0.3rem 0.7rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all 0.2s;text-transform:uppercase;}
+.nav-links a:hover,.nav-links a.active{color:var(--ochre-pale);border-color:rgba(196,168,122,0.25);background:rgba(196,168,122,0.06);}
+.page-hero{padding:8rem 2rem 4rem;text-align:center;max-width:800px;margin:0 auto;}
+.page-eyebrow{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:1rem;}
+.page-title{font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;color:var(--bone);margin-bottom:1rem;line-height:1.1;}
+.page-sub{font-size:1.1rem;color:var(--sand);font-style:italic;max-width:580px;margin:0 auto;}
+.section{padding:4rem 2rem;max-width:1060px;margin:0 auto;}
+.section-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.75rem;}
+h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--bone);margin-bottom:1.5rem;}
+h3{font-family:'Cinzel',serif;font-size:1rem;font-weight:400;color:var(--ochre-pale);margin-bottom:0.75rem;}
+p{color:var(--muted);margin-bottom:1rem;}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,122,0.2),transparent);}
+
+.criteria-full{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem;}
+.cf-card{background:rgba(12,10,8,0.9);border:1px solid rgba(196,168,122,0.1);border-radius:8px;padding:1.75rem;}
+.cf-icon{font-size:1.4rem;margin-bottom:0.75rem;display:block;}
+.cf-title{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.15em;color:var(--ochre-pale);text-transform:uppercase;margin-bottom:0.5rem;display:block;}
+.cf-must{font-size:0.78rem;color:rgba(155,74,28,0.8);font-family:'Cinzel',serif;letter-spacing:0.08em;margin-bottom:0.4rem;display:block;}
+.cf-desc{font-size:0.88rem;color:var(--dim);line-height:1.7;}
+
+.states-section{margin-top:2rem;}
+.state-card{background:rgba(12,10,8,0.8);border:1px solid rgba(90,122,62,0.2);border-radius:8px;padding:1.5rem;margin-bottom:1rem;display:grid;grid-template-columns:140px 1fr;gap:1.5rem;align-items:start;}
+.sc-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--bone);margin-bottom:0.25rem;}
+.sc-rank{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--sage-light);text-transform:uppercase;}
+.sc-desc{font-size:0.88rem;color:var(--dim);line-height:1.7;}
+.sc-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.5rem;}
+.sc-tag{padding:0.1rem 0.5rem;border:1px solid rgba(90,122,62,0.25);border-radius:10px;font-size:0.7rem;color:rgba(122,154,88,0.8);font-family:'Cinzel',serif;letter-spacing:0.06em;}
+
+.terms-box{background:linear-gradient(135deg,rgba(20,15,8,0.98) 0%,rgba(28,20,10,0.95) 100%);border:1px solid rgba(196,168,122,0.15);border-radius:12px;padding:3rem;margin-top:2rem;}
+.terms-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--ochre-pale);margin-bottom:1.5rem;}
+.terms-table{width:100%;border-collapse:collapse;}
+.terms-table th{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.15em;color:var(--ochre);padding:0.6rem 1rem;border-bottom:1px solid rgba(196,168,122,0.15);text-align:left;text-transform:uppercase;}
+.terms-table td{padding:0.7rem 1rem;font-size:0.88rem;color:var(--dim);border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+.terms-table td:first-child{color:var(--sand-pale);font-size:0.82rem;width:35%;}
+.terms-table tr:last-child td{border-bottom:none;}
+
+.no-box{background:rgba(155,74,28,0.06);border:1px solid rgba(155,74,28,0.2);border-radius:8px;padding:1.5rem;margin-top:1.5rem;}
+.no-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:rgba(196,100,53,0.8);text-transform:uppercase;margin-bottom:0.75rem;}
+.no-list{list-style:none;font-size:0.88rem;color:var(--dim);line-height:2;}
+.no-list li::before{content:'✗  ';color:rgba(155,74,28,0.6);}
+
+footer{border-top:1px solid rgba(196,168,122,0.08);padding:2.5rem 2rem;text-align:center;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--dim);}
+@media(max-width:768px){.criteria-full,.state-card{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">◈ Desert Clam</a>
+  <div class="nav-links">
+    <a href="index.html">Vision</a>
+    <a href="who.html">Who We Are</a>
+    <a href="build.html">What We Build</a>
+    <a href="land.html" class="active">The Land We Seek</a>
+    <a href="covenant.html">Covenant</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-eyebrow">Land Partnership</div>
+  <h1 class="page-title">The Land We Seek</h1>
+  <p class="page-sub">Specific. Non-negotiable. Honest. We have learned what happens when foundations are unclear.</p>
+</div>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">Required Criteria</div>
+  <h2>What the land must be</h2>
+  <div class="criteria-full">
+    <div class="cf-card">
+      <span class="cf-icon">🏔</span>
+      <span class="cf-title">Climate</span>
+      <span class="cf-must">Non-negotiable</span>
+      <p class="cf-desc">High desert or mountain. Dry. Four seasons with real winter. Low humidity year-round. Several members are recovering from mold and wildfire toxin exposure — this requirement is medical, not aesthetic.</p>
+    </div>
+    <div class="cf-card">
+      <span class="cf-icon">💧</span>
+      <span class="cf-title">Water</span>
+      <span class="cf-must">Non-negotiable</span>
+      <p class="cf-desc">Clean well or documented water rights. Tested for uranium, arsenic, PFAS, nitrates, and industrial contamination. We will conduct independent testing before committing to any property. No exceptions.</p>
+    </div>
+    <div class="cf-card">
+      <span class="cf-icon">📐</span>
+      <span class="cf-title">Acreage</span>
+      <span class="cf-must">20 acres minimum</span>
+      <p class="cf-desc">Sufficient for food forest, paddocks, individual private residence areas, communal structures, animal operations, and future expansion. We are building a system. Systems need space to breathe.</p>
+    </div>
+    <div class="cf-card">
+      <span class="cf-icon">⚖️</span>
+      <span class="cf-title">Political Environment</span>
+      <span class="cf-must">Non-negotiable</span>
+      <p class="cf-desc">Progressive or politically neutral at the state level. We are a diverse, neurodivergent community with health-focused and non-traditional living arrangements. State law governs daily life in ways that matter to us.</p>
+    </div>
+    <div class="cf-card">
+      <span class="cf-icon">☀️</span>
+      <span class="cf-title">Solar Access</span>
+      <span class="cf-must">Required</span>
+      <p class="cf-desc">South-facing exposure for passive solar earth structures and off-grid solar array. We build without grid dependency. Sun is our utility.</p>
+    </div>
+    <div class="cf-card">
+      <span class="cf-icon">📋</span>
+      <span class="cf-title">Legal Clarity</span>
+      <span class="cf-must">Non-negotiable</span>
+      <p class="cf-desc">Clear title. Landowner has full legal authority to enter long-term agreements. All agreements reviewed by licensed attorney before any permanent structure is built. We will not break ground on a handshake.</p>
+    </div>
+  </div>
+
+  <div class="no-box">
+    <div class="no-title">What we will not consider</div>
+    <ul class="no-list">
+      <li>Rented land — the landowner must hold clear title</li>
+      <li>Humid climates with documented mold risk</li>
+      <li>States with hostile policy toward diverse or non-traditional communities</li>
+      <li>Properties with untested or known water contamination</li>
+      <li>Informal arrangements without written legal documentation</li>
+      <li>Situations where we cannot independently verify representations made about the property</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">Where We Are Looking</div>
+  <h2>States under consideration</h2>
+  <div class="states-section">
+
+    <div class="state-card">
+      <div>
+        <div class="sc-name">New Mexico</div>
+        <div class="sc-rank">⭐ Top Priority</div>
+      </div>
+      <div>
+        <p class="sc-desc">High desert, dry, strong existing intentional community and permaculture networks. Land prices still reasonable. Politically moderate to progressive at state level. Clean water available in mountain areas. Strong solar resources. Close to existing community for supplies and market.</p>
+        <div class="sc-tags">
+          <span class="sc-tag">Dry</span><span class="sc-tag">Affordable</span><span class="sc-tag">Permaculture Networks</span><span class="sc-tag">Solar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div>
+        <div class="sc-name">Colorado</div>
+        <div class="sc-rank">⭐ Top Priority</div>
+      </div>
+      <div>
+        <p class="sc-desc">Dry mountain climate. Strong progressive political infrastructure. Excellent water in mountain regions away from Front Range urban contamination. Active farming and homesteading community. Higher land prices but strong grant and agricultural support ecosystem.</p>
+        <div class="sc-tags">
+          <span class="sc-tag">Mountain</span><span class="sc-tag">Progressive</span><span class="sc-tag">Clean Water</span><span class="sc-tag">Grant Support</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div>
+        <div class="sc-name">Montana</div>
+        <div class="sc-rank">Strong Candidate</div>
+      </div>
+      <div>
+        <p class="sc-desc">Dry, clean, extraordinary land. Missoula area is politically progressive. Cold winters require robust thermal mass building — which is what we build. Longer establishment timeline for food forest but the land quality is exceptional. Least expensive quality land on this list.</p>
+        <div class="sc-tags">
+          <span class="sc-tag">Very Dry</span><span class="sc-tag">Clean</span><span class="sc-tag">Affordable Land</span><span class="sc-tag">Cold Winters</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div>
+        <div class="sc-name">Eastern Oregon</div>
+        <div class="sc-rank">Strong Candidate</div>
+      </div>
+      <div>
+        <p class="sc-desc">High desert east of the Cascades — completely different climate from wet western Oregon. Dry, sunny, politically more moderate than the coast. Strong agricultural heritage. Oregon state law is progressive. Land prices moderate.</p>
+        <div class="sc-tags">
+          <span class="sc-tag">High Desert</span><span class="sc-tag">State Progressive</span><span class="sc-tag">Agricultural</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-card">
+      <div>
+        <div class="sc-name">Northern Arizona</div>
+        <div class="sc-rank">Conditional</div>
+      </div>
+      <div>
+        <p class="sc-desc">Flagstaff area and White Mountains at high enough elevation to be dry and mold-free. State political environment is a concern. Water must be independently tested — uranium contamination exists in parts of the region. Right property in right location is viable.</p>
+        <div class="sc-tags">
+          <span class="sc-tag">Elevation Required</span><span class="sc-tag">Water Testing Critical</span><span class="sc-tag">State Politics Concern</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">The Partnership Structure</div>
+  <h2>What a partnership<br>with Desert Clam looks like</h2>
+  <p>We are not renters. We are not employees. We are a community that builds, improves, and stewards land in exchange for the right to occupy it and — over time — to own our small piece of it.</p>
+
+  <div class="terms-box">
+    <div class="terms-title">Proposed Term Sheet</div>
+    <table class="terms-table">
+      <thead>
+        <tr><th>Term</th><th>Our Proposal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Occupancy Agreement</td><td>Long-term lease 20–30 years, recorded with county, reviewed by attorney. Below-market rent in exchange for improvements.</td></tr>
+        <tr><td>Improvements Ownership</td><td>Community members retain ownership of structures they fund and build. Right to remove or sell to landowner at appraised value upon departure.</td></tr>
+        <tr><td>Property Value</td><td>Every food forest, water system, and structure built increases the landowner's property value permanently. This is the return on the lease discount.</td></tr>
+        <tr><td>Individual Parcel Pathway</td><td>Community members may purchase small individual parcels over time as community revenue develops. Landowner is not selling the land — specific small parcels become available by agreement as thresholds are reached.</td></tr>
+        <tr><td>Right of First Refusal</td><td>Community holds right of first refusal if landowner sells. 60–90 days to match any offer.</td></tr>
+        <tr><td>Revenue Sharing</td><td>A portion of community revenue offsets landowner property tax burden. Specific percentage defined in agreement.</td></tr>
+        <tr><td>Land Stewardship</td><td>Community commits to documented regenerative practices. Annual land health report provided to landowner.</td></tr>
+        <tr><td>Legal Review</td><td>All terms reviewed by attorney licensed in the relevant state before any permanent structure is built. Non-negotiable.</td></tr>
+        <tr><td>Dissolution Terms</td><td>Clear exit terms, notice period, asset disposition, and community members' rights defined in advance — not when things get complicated.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:1.5rem;font-style:italic;color:var(--dim);">The right landowner is not primarily motivated by cash return. They have land they love, cannot develop alone, and want to see tended, built upon, and made beautiful by people who will treat it as their own — because it will become their own.</p>
+</section>
+
+<footer>
+  DESERT CLAM · THE LAND WE SEEK<br><br>
+  <a href="index.html" style="color:rgba(196,168,122,0.4);text-decoration:none;letter-spacing:0.15em;">← BACK TO VISION</a>
+</footer>
+</body>
+</html>

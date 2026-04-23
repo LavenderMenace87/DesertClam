@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Covenant — Desert Clam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--void:#08080a;--sand:#c4a87a;--bone:#f0e8d5;--muted:rgba(240,232,213,0.6);--dim:rgba(240,232,213,0.35);--ochre:#b8872a;--ochre-pale:#d8a84a;--sage:#5a7a3e;--sage-light:#7a9a58;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--void);color:var(--bone);font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.8;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(8,8,10,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,168,122,0.12);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.95rem;letter-spacing:0.2em;color:var(--ochre);text-decoration:none;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-links a{padding:0.3rem 0.7rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all 0.2s;text-transform:uppercase;}
+.nav-links a:hover,.nav-links a.active{color:var(--ochre-pale);border-color:rgba(196,168,122,0.25);background:rgba(196,168,122,0.06);}
+
+.doc-wrap{display:grid;grid-template-columns:200px 1fr;max-width:1020px;margin:0 auto;padding:6rem 2rem 4rem;}
+.sidebar{position:sticky;top:70px;align-self:start;padding-right:2rem;}
+.sb-label{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--ochre);text-transform:uppercase;padding:0.5rem 0;margin-bottom:0.4rem;border-bottom:1px solid rgba(196,168,122,0.1);}
+.sb-link{display:block;padding:0.3rem 0;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.06em;color:var(--dim);text-decoration:none;border-left:2px solid transparent;padding-left:0.5rem;transition:all 0.15s;}
+.sb-link:hover,.sb-link.active{color:var(--ochre-pale);border-left-color:var(--ochre);}
+
+.doc-body{border-left:1px solid rgba(196,168,122,0.08);padding-left:3rem;}
+.preamble{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(196,168,122,0.1);}
+.preamble-title{font-family:'Cinzel',serif;font-size:2rem;font-weight:400;color:var(--bone);margin-bottom:0.5rem;}
+.preamble-date{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--dim);margin-bottom:1.5rem;}
+.preamble-text{font-size:0.95rem;color:var(--muted);line-height:1.9;font-style:italic;}
+
+.article{margin-bottom:3.5rem;scroll-margin-top:70px;}
+.art-num{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.4rem;}
+.art-title{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:400;color:var(--bone);margin-bottom:1.25rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(196,168,122,0.12);}
+.provision{display:grid;grid-template-columns:38px 1fr;gap:0.6rem;margin-bottom:0.85rem;}
+.pn{font-family:'Cinzel',serif;font-size:0.7rem;color:rgba(196,168,122,0.4);padding-top:0.2rem;font-weight:600;}
+.pt{font-size:0.92rem;color:var(--muted);line-height:1.8;}
+.pt strong{color:var(--ochre-pale);}
+.callout{background:rgba(196,168,122,0.04);border-left:2px solid var(--ochre);padding:1rem 1.25rem;margin:1.25rem 0;font-size:0.88rem;color:var(--muted);font-style:italic;border-radius:0 4px 4px 0;}
+
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:1.25rem 0;}
+.val-card{background:rgba(12,10,8,0.8);border:1px solid rgba(196,168,122,0.08);border-radius:6px;padding:1rem;}
+.vc-name{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--ochre-pale);display:block;margin-bottom:0.3rem;}
+.vc-def{font-size:0.85rem;color:var(--dim);line-height:1.6;}
+
+.sig-block{margin-top:4rem;padding:2.5rem;background:rgba(12,10,8,0.8);border:1px solid rgba(196,168,122,0.1);border-radius:8px;text-align:center;}
+.sig-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;color:var(--ochre);text-transform:uppercase;margin-bottom:2rem;}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+.sig-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--bone);}
+.sig-role{font-size:0.8rem;color:var(--dim);font-style:italic;margin-top:0.2rem;}
+.sig-line{border-top:1px solid rgba(196,168,122,0.2);margin-top:1.5rem;padding-top:0.5rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--dim);}
+
+footer{border-top:1px solid rgba(196,168,122,0.08);padding:2.5rem 2rem;text-align:center;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--dim);}
+@media(max-width:768px){.doc-wrap{grid-template-columns:1fr;}.sidebar{display:none;}.doc-body{padding-left:0;border-left:none;}.values-grid,.sig-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">◈ Desert Clam</a>
+  <div class="nav-links">
+    <a href="index.html">Vision</a>
+    <a href="who.html">Who We Are</a>
+    <a href="build.html">What We Build</a>
+    <a href="land.html">The Land We Seek</a>
+    <a href="covenant.html" class="active">Covenant</a>
+  </div>
+</nav>
+
+<div class="doc-wrap">
+  <nav class="sidebar">
+    <div class="sb-label">Articles</div>
+    <a href="#a1" class="sb-link">I. Identity</a>
+    <a href="#a2" class="sb-link">II. Values</a>
+    <a href="#a3" class="sb-link">III. The Land</a>
+    <a href="#a4" class="sb-link">IV. Membership</a>
+    <a href="#a5" class="sb-link">V. Governance</a>
+    <a href="#a6" class="sb-link">VI. Founders</a>
+    <a href="#a7" class="sb-link">VII. Land Use</a>
+    <a href="#a8" class="sb-link">VIII. Housing</a>
+    <a href="#a9" class="sb-link">IX. Work</a>
+    <a href="#a10" class="sb-link">X. Commons</a>
+    <a href="#a11" class="sb-link">XI. Review</a>
+    <a href="#sig" class="sb-link">Signatures</a>
+  </nav>
+
+  <div class="doc-body">
+    <div class="preamble">
+      <div class="preamble-title">The Covenant</div>
+      <div class="preamble-date">Desert Clam Community Constitution · 2026</div>
+      <p class="preamble-text"><strong>WHEREAS</strong>, we the founders and members of Desert Clam recognize that land is held in stewardship rather than dominion, and that a community flourishes through shared purpose, honest labor, beauty, and regeneration;<br><br>
+      <strong>WHEREAS</strong>, Desert Clam exists as a regenerative healing community and creative land lab rooted in the high desert West;<br><br>
+      <strong>NOW THEREFORE</strong>, we establish this Constitution as our governing charter.</p>
+    </div>
+
+    <div class="article" id="a1">
+      <div class="art-num">Article I</div>
+      <div class="art-title">Identity and Purpose</div>
+      <div class="provision"><span class="pn">1.1</span><span class="pt">Desert Clam is a private intentional community organized for <strong>regenerative living, holistic health, ecological stewardship, creative work, education, and mutually beneficial community life.</strong></span></div>
+      <div class="provision"><span class="pn">1.2</span><span class="pt">The Community shall prioritize <strong>closed-loop systems, clean food, soil building, water harvesting, beauty in design,</strong> and practices that strengthen the land and the people on it.</span></div>
+      <div class="provision"><span class="pn">1.3</span><span class="pt">No interpretation of this Constitution shall permit extraction, neglect, toxic materials, or conduct inconsistent with the Community's regenerative purpose.</span></div>
+      <div class="provision"><span class="pn">1.4</span><span class="pt">This Constitution is designed as a <strong>replicable social contract</strong> — a case study and template for intentional communities that wish to build something similar.</span></div>
+    </div>
+
+    <div class="article" id="a2">
+      <div class="art-num">Article II</div>
+      <div class="art-title">Founding Values</div>
+      <div class="callout">These are not aspirational statements. They are the standard against which every decision, structure, and member is evaluated.</div>
+      <div class="values-grid">
+        <div class="val-card"><span class="vc-name">Creativity</span><p class="vc-def">The way you solve problems, build systems, imagine new forms. If you are here, you are making something.</p></div>
+        <div class="val-card"><span class="vc-name">Growth</span><p class="vc-def">Personal, ecological, communal. Things that stop growing, die.</p></div>
+        <div class="val-card"><span class="vc-name">Land Stewardship</span><p class="vc-def">You tend this land. You return more than you take. Every practice is evaluated against whether it regenerates or extracts.</p></div>
+        <div class="val-card"><span class="vc-name">Beauty</span><p class="vc-def">A standard of craft. The evidence that something was made with intention. Not decoration — commitment.</p></div>
+        <div class="val-card" style="grid-column:1/-1"><span class="vc-name">Responsibility</span><p class="vc-def">You show up for your commitments. To the land, to the people, to the agreements. This is the mechanism that makes the other four sustainable.</p></div>
+      </div>
+    </div>
+
+    <div class="article" id="a3">
+      <div class="art-num">Article III</div>
+      <div class="art-title">The Land</div>
+      <div class="provision"><span class="pn">3.1</span><span class="pt">The Community shall be situated on land that is <strong>dry, high-elevation, tested for water quality, legally clear, and accessible under a long-term recorded agreement.</strong></span></div>
+      <div class="provision"><span class="pn">3.2</span><span class="pt">The wash corridor, water-harvesting features, and ecological systems of the property shall be treated as essential commons and protected accordingly.</span></div>
+      <div class="provision"><span class="pn">3.3</span><span class="pt">No harmful chemicals, no plastics where avoidable, no electricity dependency without built-in redundancy. Materials preference: clay, stone, timber, earthbag, adobe, cob.</span></div>
+      <div class="provision"><span class="pn">3.4</span><span class="pt">The Community shall comply with all applicable water laws and permitting requirements <strong>before</strong> constructing ponds, swales, or surface water features.</span></div>
+    </div>
+
+    <div class="article" id="a4">
+      <div class="art-num">Article IV</div>
+      <div class="art-title">Membership</div>
+      <div class="provision"><span class="pn">4.1</span><span class="pt">Membership is a privilege conditioned on adherence to this Constitution and the Community's values.</span></div>
+      <div class="provision"><span class="pn">4.2</span><span class="pt">Classes: <strong>Founding Members, Permanent Residents, Long-Stay Members, Working Guests, Rotating Volunteers, Retreat Guests.</strong></span></div>
+      <div class="provision"><span class="pn">4.3</span><span class="pt">Permanent Residents commit to multi-year tenure, substantial labor, and participation in governance and commons maintenance.</span></div>
+      <div class="provision"><span class="pn">4.4</span><span class="pt">No person shall be admitted or retained who cannot live in good faith with the Community's values and agreements.</span></div>
+    </div>
+
+    <div class="article" id="a5">
+      <div class="art-num">Article V</div>
+      <div class="art-title">Governance</div>
+      <div class="callout">Personal domain is sovereign. The commons are governed collectively. The distinction between these is explicit, not assumed.</div>
+      <div class="provision"><span class="pn">5.1</span><span class="pt">Decisions shall be made <strong>as close as possible to the people most affected by them.</strong></span></div>
+      <div class="provision"><span class="pn">5.2</span><span class="pt">Matters affecting private structures, personal practice, and individual conduct remain within the domain of the responsible person.</span></div>
+      <div class="provision"><span class="pn">5.3</span><span class="pt">Matters affecting commons — water systems, shared kitchen, land corridors, animal operations, community revenue — are governed collectively by voting members.</span></div>
+      <div class="provision"><span class="pn">5.4</span><span class="pt">No steward or founder shall exercise authority beyond the scope expressly granted by this Constitution.</span></div>
+    </div>
+
+    <div class="article" id="a6">
+      <div class="art-num">Article VI</div>
+      <div class="art-title">The Founders</div>
+      <div class="provision"><span class="pn">6.1</span><span class="pt">The Founding Steward holds the community vision and architecture. First among equals with founding authority. Not above the governance structure they created.</span></div>
+      <div class="provision"><span class="pn">6.2</span><span class="pt">All founder contributions — land, labor, capital, medical expertise, construction capacity — shall be defined in a <strong>written agreement reviewed by counsel licensed in the relevant state.</strong></span></div>
+      <div class="provision"><span class="pn">6.3</span><span class="pt">No permanent structure shall be built before the founders' agreement is signed. This is not flexible.</span></div>
+    </div>
+
+    <div class="article" id="a7">
+      <div class="art-num">Article VII</div>
+      <div class="art-title">Land Use</div>
+      <div class="provision"><span class="pn">7.1</span><span class="pt">The land shall be used to <strong>increase fertility, conserve water, reduce fire risk, support habitat,</strong> and improve long-term productivity and beauty.</span></div>
+      <div class="provision"><span class="pn">7.2</span><span class="pt">Members shall not engage in extractive use without corresponding replenishment. This is the foundational law.</span></div>
+      <div class="provision"><span class="pn">7.3</span><span class="pt">The Community may designate conservation, production, residence, hospitality, and work zones by written plan, revisable by Community vote.</span></div>
+    </div>
+
+    <div class="article" id="a8">
+      <div class="art-num">Article VIII</div>
+      <div class="art-title">Housing and Structures</div>
+      <div class="provision"><span class="pn">8.1</span><span class="pt">Structures shall be <strong>durable, beautiful, climate-appropriate, low-impact, and capable of multiple functions.</strong></span></div>
+      <div class="provision"><span class="pn">8.2</span><span class="pt">Each permanent resident selects their own private site. It is mapped, recorded, and protected. No one else builds there.</span></div>
+      <div class="provision"><span class="pn">8.3</span><span class="pt">Agreements about improvements shall specify <strong>ownership, removal rights, reimbursement rights, and treatment upon departure.</strong></span></div>
+    </div>
+
+    <div class="article" id="a9">
+      <div class="art-num">Article IX</div>
+      <div class="art-title">Work and Contribution</div>
+      <div class="callout">This is not a passive residence. Membership carries obligations of labor proportionate to role and capacity.</div>
+      <div class="provision"><span class="pn">9.1</span><span class="pt">Each resident contributes to the Community: animal care, building, food production, cleaning, hospitality, administration, or education.</span></div>
+      <div class="provision"><span class="pn">9.2</span><span class="pt">The Community may establish <strong>labor-credit, revenue-share, housing-for-work, and barter arrangements</strong> by written agreement.</span></div>
+      <div class="provision"><span class="pn">9.3</span><span class="pt">Labor expectations shall be stated in advance and shall not be exceeded without consent.</span></div>
+    </div>
+
+    <div class="article" id="a10">
+      <div class="art-num">Article X</div>
+      <div class="art-title">Commons and Revenue</div>
+      <div class="provision"><span class="pn">10.1</span><span class="pt">Community income shall be accounted for transparently and used first for <strong>operating expenses, reserves, infrastructure, and agreed distributions.</strong></span></div>
+      <div class="provision"><span class="pn">10.2</span><span class="pt">Where labor entitles compensation or revenue share, the formula shall be stated in writing and administered in good faith.</span></div>
+      <div class="provision"><span class="pn">10.3</span><span class="pt">The Community shall maintain bookkeeping sufficient to show income, expenses, reserves, and distributions with reasonable clarity.</span></div>
+    </div>
+
+    <div class="article" id="a11">
+      <div class="art-num">Article XI</div>
+      <div class="art-title">Review and Replication</div>
+      <div class="provision"><span class="pn">11.1</span><span class="pt"><strong>Annual Review.</strong> Every year the community gathers to reaffirm, revise, or sunset agreements. The living community governs — not the founders' original vision frozen in clay.</span></div>
+      <div class="provision"><span class="pn">11.2</span><span class="pt"><strong>Sunset Provisions.</strong> Rules not actively reaffirmed expire. No provision persists without consent of the people living under it.</span></div>
+      <div class="provision"><span class="pn">11.3</span><span class="pt"><strong>Conflict Resolution.</strong> Disputes go first to direct conversation, then to a circle of three — one chosen by each party, one chosen by both. Advisory, not binding, but carries weight.</span></div>
+      <div class="provision"><span class="pn">11.4</span><span class="pt"><strong>Replication.</strong> This Constitution is designed to be adapted. It is a case study and a template. The teaching mission of Desert Clam includes sharing this governance architecture with communities that want to build something similar.</span></div>
+    </div>
+
+    <div class="sig-block" id="sig">
+      <div class="sig-title">Founders' Signatures</div>
+      <div class="sig-grid">
+        <div>
+          <div class="sig-name">Lindsay</div>
+          <div class="sig-role">Founding Steward · Community Architect</div>
+          <div class="sig-line">SIGNATURE · DATE</div>
+        </div>
+        <div>
+          <div class="sig-name">Founding Family</div>
+          <div class="sig-role">Medical Director · Construction · Community</div>
+          <div class="sig-line">SIGNATURE · DATE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  DESERT CLAM · THE COVENANT · HIGH DESERT WEST<br><br>
+  <a href="index.html" style="color:rgba(196,168,122,0.4);text-decoration:none;letter-spacing:0.15em;">← BACK TO VISION</a>
+</footer>
+
+<script>
+const arts=document.querySelectorAll('.article,.sig-block,.preamble');
+const links=document.querySelectorAll('.sb-link');
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){const id=en.target.id;links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}});},{rootMargin:'-10% 0px -80% 0px'});
+arts.forEach(a=>a.id&&obs.observe(a));
+</script>
+</body>
+</html>

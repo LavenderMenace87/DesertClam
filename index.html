@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desert Clam — Regenerative Healing Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #08080a;
+  --deep: #12100e;
+  --sand: #c4a87a;
+  --sand-pale: #e8d8b8;
+  --rust: #9B4A1C;
+  --rust-light: #c46a35;
+  --sage: #5a7a3e;
+  --sage-light: #7a9a58;
+  --bone: #f0e8d5;
+  --muted: rgba(240,232,213,0.6);
+  --dim: rgba(240,232,213,0.35);
+  --ochre: #b8872a;
+  --ochre-pale: #d8a84a;
+  --teal: #3a7070;
+  --sky: #4a7a8a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--bone);font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.8;overflow-x:hidden;}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.5;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(8,8,10,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,168,122,0.12);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.95rem;letter-spacing:0.2em;color:var(--ochre);text-decoration:none;}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-links a{padding:0.3rem 0.7rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--dim);text-decoration:none;border:1px solid transparent;border-radius:2px;transition:all 0.2s;text-transform:uppercase;}
+.nav-links a:hover,.nav-links a.active{color:var(--ochre-pale);border-color:rgba(196,168,122,0.25);background:rgba(196,168,122,0.06);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 2rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(155,74,28,0.12) 0%,transparent 65%),radial-gradient(ellipse at 20% 80%,rgba(90,122,62,0.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(58,112,112,0.08) 0%,transparent 50%);pointer-events:none;}
+
+.hero-symbol{font-size:3.5rem;margin-bottom:2rem;opacity:0.8;animation:fadeUp 1.2s ease both;}
+.hero-name{font-family:'Cinzel',serif;font-size:clamp(3rem,8vw,7rem);font-weight:600;letter-spacing:0.05em;color:var(--bone);line-height:1;margin-bottom:1rem;animation:fadeUp 1.2s ease 0.15s both;}
+.hero-tagline{font-size:clamp(1rem,2vw,1.4rem);color:var(--sand);font-style:italic;font-weight:300;max-width:650px;margin:0 auto 1.5rem;animation:fadeUp 1.2s ease 0.3s both;}
+.hero-meta{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.3em;color:var(--dim);text-transform:uppercase;animation:fadeUp 1.2s ease 0.45s both;margin-bottom:3rem;}
+.hero-values{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;animation:fadeUp 1.2s ease 0.6s both;}
+.val{padding:0.3rem 1rem;border:1px solid rgba(196,168,122,0.2);border-radius:20px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.12em;color:var(--ochre-pale);background:rgba(196,168,122,0.04);}
+.scroll-line{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.scroll-line span{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--dim);}
+.scroll-line::after{content:'';width:1px;height:36px;background:linear-gradient(to bottom,rgba(196,168,122,0.4),transparent);animation:pulse 2s ease infinite;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* SECTIONS */
+.section{padding:6rem 2rem;max-width:1060px;margin:0 auto;}
+.section-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.75rem;}
+h2{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.6rem);font-weight:400;color:var(--bone);margin-bottom:1.5rem;line-height:1.2;}
+h3{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:400;color:var(--ochre-pale);margin-bottom:0.75rem;}
+p{color:var(--muted);margin-bottom:1rem;}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,122,0.2),transparent);}
+
+/* CLAM SYMBOL SECTION */
+.clam-section{padding:5rem 2rem;text-align:center;position:relative;}
+.clam-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(155,74,28,0.06) 0%,transparent 70%);pointer-events:none;}
+.clam-svg-wrap{max-width:420px;margin:0 auto 2rem;}
+
+/* WHO WE ARE */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2rem;}
+.skill-card{background:rgba(18,16,14,0.8);border:1px solid rgba(196,168,122,0.1);border-radius:8px;padding:1.75rem;transition:all 0.3s;}
+.skill-card:hover{border-color:rgba(196,168,122,0.3);background:rgba(196,168,122,0.04);}
+.sk-icon{font-size:1.6rem;margin-bottom:0.75rem;display:block;}
+.sk-title{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.12em;color:var(--ochre-pale);display:block;margin-bottom:0.5rem;}
+.sk-desc{font-size:0.88rem;color:var(--dim);line-height:1.6;}
+
+/* WHAT WE BUILD */
+.build-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;}
+.build-card{background:rgba(12,10,8,0.9);border:1px solid rgba(196,168,122,0.08);border-radius:8px;padding:2rem;position:relative;overflow:hidden;}
+.build-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--ochre),transparent);opacity:0.4;}
+.bc-label{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;color:var(--ochre);text-transform:uppercase;margin-bottom:0.75rem;display:block;}
+.bc-list{list-style:none;font-size:0.88rem;color:var(--dim);line-height:2.1;}
+.bc-list li::before{content:'✦  ';color:rgba(196,168,122,0.4);font-size:0.6rem;}
+
+/* LANDOWNER SECTION */
+.landowner-hero{background:linear-gradient(135deg,rgba(20,15,8,0.95) 0%,rgba(30,22,12,0.9) 100%);border:1px solid rgba(196,168,122,0.15);border-radius:12px;padding:4rem;margin-top:2rem;position:relative;overflow:hidden;}
+.landowner-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 50%,rgba(155,74,28,0.08) 0%,transparent 60%);pointer-events:none;}
+.lh-quote{font-size:1.4rem;font-style:italic;color:var(--sand-pale);line-height:1.6;margin-bottom:2rem;font-weight:300;}
+.lh-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.lh-list li{font-size:0.9rem;color:var(--muted);padding:0.6rem 0;border-bottom:1px solid rgba(196,168,122,0.06);}
+.lh-list li::before{content:'→  ';color:var(--ochre);font-size:0.75rem;}
+
+/* LAND CRITERIA */
+.criteria-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem;}
+.crit-card{background:rgba(12,10,8,0.8);border:1px solid rgba(196,168,122,0.1);border-radius:6px;padding:1.25rem;}
+.crit-icon{font-size:1.2rem;margin-bottom:0.5rem;display:block;}
+.crit-title{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--ochre-pale);display:block;margin-bottom:0.4rem;}
+.crit-desc{font-size:0.82rem;color:var(--dim);line-height:1.5;}
+
+/* STATES */
+.states-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem;}
+.state-tag{padding:0.4rem 1rem;background:rgba(90,122,62,0.15);border:1px solid rgba(90,122,62,0.3);border-radius:20px;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;color:var(--sage-light);}
+
+/* NAV CARDS */
+.nav-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem;}
+.nav-card{background:rgba(18,16,14,0.8);border:1px solid rgba(196,168,122,0.1);border-radius:8px;padding:1.75rem;text-decoration:none;transition:all 0.3s;display:block;}
+.nav-card:hover{border-color:rgba(196,168,122,0.35);transform:translateY(-3px);}
+.nc-icon{font-size:1.5rem;margin-bottom:0.75rem;display:block;}
+.nc-title{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.1em;color:var(--ochre-pale);display:block;margin-bottom:0.5rem;}
+.nc-desc{font-size:0.82rem;color:var(--dim);line-height:1.5;}
+
+/* CLOSING */
+.closing{text-align:center;padding:6rem 2rem;position:relative;}
+.closing-text{font-size:clamp(1.1rem,2vw,1.5rem);font-style:italic;color:var(--sand);max-width:700px;margin:0 auto 2rem;line-height:1.8;font-weight:300;}
+.closing-name{font-family:'Cinzel',serif;font-size:2rem;color:var(--bone);letter-spacing:0.1em;}
+
+footer{border-top:1px solid rgba(196,168,122,0.08);padding:2.5rem 2rem;text-align:center;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.25em;color:var(--dim);}
+
+@media(max-width:768px){
+  .build-grid{grid-template-columns:1fr;}
+  .lh-list{grid-template-columns:1fr;}
+  .nav-links a{font-size:0.55rem;padding:0.25rem 0.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">◈ Desert Clam</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Vision</a>
+    <a href="who.html">Who We Are</a>
+    <a href="build.html">What We Build</a>
+    <a href="land.html">The Land We Seek</a>
+    <a href="covenant.html">Covenant</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-symbol">◈</div>
+  <h1 class="hero-name">Desert Clam</h1>
+  <p class="hero-tagline">A regenerative healing community and creative land lab seeking its home</p>
+  <div class="hero-meta">Multi-generational · Neurodivergent · Skilled · Ready</div>
+  <div class="hero-values">
+    <span class="val">Regenerative Agriculture</span>
+    <span class="val">Holistic Health</span>
+    <span class="val">Creative Arts</span>
+    <span class="val">Ancient Knowledge</span>
+    <span class="val">Closed-Loop Systems</span>
+    <span class="val">Community Architecture</span>
+  </div>
+  <div class="scroll-line"><span>EXPLORE</span></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHAT IS DESERT CLAM -->
+<section class="section">
+  <div class="section-label">Who We Are</div>
+  <h2>Not a commune.<br>A founding group.</h2>
+  <p>Desert Clam is a multi-generational community of skilled, intentional people — builders, healers, designers, farmers, artists, and parents — who have found each other and are now looking for the land that deserves what we bring.</p>
+  <p>We are neurodivergent, health-conscious, and deeply committed to building systems that regenerate rather than extract. We do not need to be managed. We need land, partnership, and legal clarity. Everything else we already have.</p>
+  <p>Between us we hold construction engineering, holistic and medical knowledge, permaculture design, community architecture, regenerative agriculture, cooking, animal husbandry, and creative arts. We arrive with tools, a blueprint, a constitution, and the critical mass to begin on day one.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLAM DIAGRAM -->
+<div class="clam-section">
+  <div class="section-label" style="text-align:center;">The Symbol</div>
+  <h2 style="text-align:center;margin-bottom:0.5rem;">Hard shell. Open interior.</h2>
+  <p style="text-align:center;max-width:550px;margin:0 auto 2.5rem;font-style:italic;">Filters everything it touches. Opens only when conditions are right. Transforms what passes through it into something of value.</p>
+  <svg class="clam-svg-wrap" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="clamGrad" cx="50%" cy="60%" r="50%">
+        <stop offset="0%" stop-color="rgba(155,74,28,0.3)"/>
+        <stop offset="100%" stop-color="rgba(155,74,28,0.05)"/>
+      </radialGradient>
+      <radialGradient id="innerGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(90,122,62,0.2)"/>
+        <stop offset="100%" stop-color="rgba(90,122,62,0.05)"/>
+      </radialGradient>
+    </defs>
+    <!-- Outer shell top -->
+    <path d="M60,160 Q80,40 200,30 Q320,40 340,160" fill="url(#clamGrad)" stroke="rgba(196,168,122,0.4)" stroke-width="2"/>
+    <!-- Outer shell bottom -->
+    <path d="M60,160 Q80,280 200,290 Q320,280 340,160" fill="url(#clamGrad)" stroke="rgba(196,168,122,0.4)" stroke-width="2"/>
+    <!-- Inner nacre -->
+    <ellipse cx="200" cy="160" rx="100" ry="80" fill="url(#innerGrad)" stroke="rgba(196,168,122,0.2)" stroke-width="1"/>
+    <!-- Ribs -->
+    <path d="M200,30 Q180,100 160,160 Q180,220 200,290" fill="none" stroke="rgba(196,168,122,0.15)" stroke-width="1"/>
+    <path d="M200,30 Q220,100 240,160 Q220,220 200,290" fill="none" stroke="rgba(196,168,122,0.15)" stroke-width="1"/>
+    <path d="M200,30 Q150,90 120,160 Q150,230 200,290" fill="none" stroke="rgba(196,168,122,0.1)" stroke-width="1"/>
+    <path d="M200,30 Q250,90 280,160 Q250,230 200,290" fill="none" stroke="rgba(196,168,122,0.1)" stroke-width="1"/>
+    <!-- Hinge -->
+    <circle cx="200" cy="160" r="8" fill="rgba(196,168,122,0.3)" stroke="rgba(196,168,122,0.5)" stroke-width="1.5"/>
+    <!-- Pearl -->
+    <circle cx="200" cy="160" r="3" fill="rgba(240,232,213,0.6)"/>
+    <!-- Labels -->
+    <text x="200" y="95" text-anchor="middle" font-family="Cinzel,serif" font-size="9" fill="rgba(196,168,122,0.5)" letter-spacing="2">PROTECTION</text>
+    <text x="200" y="235" text-anchor="middle" font-family="Cinzel,serif" font-size="9" fill="rgba(196,168,122,0.5)" letter-spacing="2">NOURISHMENT</text>
+    <text x="200" y="165" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="11" fill="rgba(240,232,213,0.4)" font-style="italic">the community within</text>
+    <!-- Flow arrows -->
+    <path d="M50,140 Q30,160 50,180" fill="none" stroke="rgba(90,122,62,0.4)" stroke-width="1.5" marker-end="url(#sa)"/>
+    <path d="M350,140 Q370,160 350,180" fill="none" stroke="rgba(90,122,62,0.4)" stroke-width="1.5"/>
+    <defs><marker id="sa" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="rgba(90,122,62,0.5)"/></marker></defs>
+    <text x="22" y="158" font-family="Cinzel,serif" font-size="7.5" fill="rgba(90,122,62,0.5)" letter-spacing="1">IN</text>
+    <text x="358" y="158" font-family="Cinzel,serif" font-size="7.5" fill="rgba(90,122,62,0.5)" letter-spacing="1">OUT</text>
+    <text x="22" y="170" font-family="Cormorant Garamond,serif" font-size="8" fill="rgba(90,122,62,0.4)" font-style="italic">land + light</text>
+    <text x="352" y="170" font-family="Cormorant Garamond,serif" font-size="8" fill="rgba(90,122,62,0.4)" font-style="italic">food + beauty</text>
+  </svg>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS OVERVIEW -->
+<section class="section">
+  <div class="section-label">Collective Capacity</div>
+  <h2>What we bring to the land</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <span class="sk-icon">🏗</span>
+      <span class="sk-title">Construction Engineering</span>
+      <p class="sk-desc">Professional construction engineering with quality tools. Structures built right, built to last, built from the land itself where possible.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">🌿</span>
+      <span class="sk-title">Holistic Health + Medicine</span>
+      <p class="sk-desc">Medical and holistic degrees. An existing nonprofit foundation. A deep understanding of how environment, food, and community affect human health at the cellular level.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">🌱</span>
+      <span class="sk-title">Permaculture Design</span>
+      <p class="sk-desc">Closed-loop regenerative system design. Food forest, water harvesting, aquaponics, soil building. A complete blueprint ready to execute.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">🎨</span>
+      <span class="sk-title">Creative Arts</span>
+      <p class="sk-desc">Pottery, writing, visual art, music. Beauty is not decoration here — it is a standard of craft that runs through every structure, every system, every meal.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">🍳</span>
+      <span class="sk-title">Food + Cooking</span>
+      <p class="sk-desc">Skilled communal cooking. Fermentation, preservation, cheesemaking, whole-food preparation. Food as medicine and as ceremony.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">🐾</span>
+      <span class="sk-title">Animal Husbandry</span>
+      <p class="sk-desc">Trained animals, livestock experience, a deep understanding of the relationship between animals and land. We know how to work with creatures, not against them.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">📜</span>
+      <span class="sk-title">Community Architecture</span>
+      <p class="sk-desc">A written constitution, a governance framework, and a social contract drawn from years of thinking about how communities succeed and fail. We are not making this up as we go.</p>
+    </div>
+    <div class="skill-card">
+      <span class="sk-icon">💻</span>
+      <span class="sk-title">Remote Income</span>
+      <p class="sk-desc">Established remote work income from day one. We are not arriving to be supported. We arrive to contribute — financially, physically, and creatively.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT WE BUILD -->
+<section class="section">
+  <div class="section-label">What We Build</div>
+  <h2>A living system,<br>not a housing arrangement</h2>
+  <p>Every structure we build serves multiple functions. Every output feeds the next input. Nothing is decorative that is not also functional. Nothing is functional that is not also beautiful.</p>
+  <div class="build-grid">
+    <div class="build-card">
+      <span class="bc-label">Food Systems</span>
+      <ul class="bc-list">
+        <li>8-layer food forest polyculture guild</li>
+        <li>Staple crops: corn, bean, squash, potato, wheat, amaranth</li>
+        <li>Fruit and nut canopy: walnut, serviceberry, fig, currant</li>
+        <li>Medicinal herb layers: lavender, echinacea, yarrow, sage</li>
+        <li>Below-ground mushroom tunnel producing year-round</li>
+        <li>Aquaponics: fish tanks feeding herb growbeds</li>
+        <li>Greenhouse hydroponics: microgreens, herbs, year-round greens</li>
+        <li>Chinampa floating garden rafts on ponds</li>
+        <li>Hugelkultur beds as underground water reservoirs</li>
+      </ul>
+    </div>
+    <div class="build-card">
+      <span class="bc-label">Infrastructure</span>
+      <ul class="bc-list">
+        <li>Earth dome buried home: passive thermal, 55–65°F year-round</li>
+        <li>Communal kitchen: stone, clay, juniper, wood-fired oven</li>
+        <li>Water harvesting: swales, crescent pools, cisterns</li>
+        <li>Solar power: off-grid, redundant, no grid dependency</li>
+        <li>Maintenance shop: forge, blacksmithing, fabrication</li>
+        <li>Pottery studio under grape canopy pergola</li>
+        <li>Art studio: north-lit, high-ceilinged, adobe</li>
+        <li>Drying shed, root cellar, cool storage</li>
+        <li>Elevated floating structures: treehouse, pods, platforms</li>
+      </ul>
+    </div>
+    <div class="build-card">
+      <span class="bc-label">Health + Healing</span>
+      <ul class="bc-list">
+        <li>Holistic health protocols embedded in daily life</li>
+        <li>Clean food from soil we build and control</li>
+        <li>No harmful chemicals, no plastics, no toxins</li>
+        <li>Ancient fermentation: cheese, kefir, kraut, vinegar</li>
+        <li>Medicinal herb cultivation and preservation</li>
+        <li>Animal-assisted connection: trained, calm animals</li>
+        <li>Mold-free, dry, high-elevation building standards</li>
+        <li>Existing nonprofit foundation as organizational anchor</li>
+      </ul>
+    </div>
+    <div class="build-card">
+      <span class="bc-label">Revenue + Sustainability</span>
+      <ul class="bc-list">
+        <li>Artist retreats and structured creative residencies</li>
+        <li>HipCamp: treehouse, elevated pods, unique stays</li>
+        <li>WWOOF hosting: skilled labor in exchange for housing</li>
+        <li>Artisan cheese, mushrooms, honey, herbs to market</li>
+        <li>Pottery, ironwork, and art sales</li>
+        <li>Teaching workshops: permaculture, fermentation, building</li>
+        <li>Speaking tours: the replicable closed-loop model</li>
+        <li>Intentional community design app: long-term vision</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:2rem;font-style:italic;color:var(--dim);text-align:center;">Year 1 revenue estimate: $86–130k. Year 3: $248–425k. Closed loop achieved: Year 5–7.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- LANDOWNER PITCH -->
+<section class="section">
+  <div class="section-label">For the Landowner</div>
+  <h2>What we offer the person<br>who has the land</h2>
+  <div class="landowner-hero">
+    <div class="lh-quote">"You have land you love and cannot develop alone. We have the people, the skills, the blueprint, and the intention. Together we build something neither of us could build separately — and your land becomes more alive than you imagined."</div>
+    <ul class="lh-list">
+      <li>Long-term lease at below-market rate in exchange for all improvements</li>
+      <li>Every structure built increases your property value permanently</li>
+      <li>Food forest matures over decades — a gift to the land itself</li>
+      <li>Water systems improve the land's hydrology and fire resilience</li>
+      <li>A living, productive, beautiful property instead of vacant acreage</li>
+      <li>Formal written agreement — clear terms, legal protection for both sides</li>
+      <li>Pathway for community members to purchase small individual parcels over time</li>
+      <li>You are not selling. You are partnering.</li>
+      <li>Your land continues under stewardship that cares for it as you do</li>
+      <li>Revenue from the community partially offsets your property taxes</li>
+    </ul>
+  </div>
+  <p style="margin-top:1.5rem;font-style:italic;color:var(--dim);">The right landowner is not primarily motivated by cash return. They have land they love and want to see tended, developed, and made beautiful by people who will treat it as their own — because it will become their own.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- LAND WE SEEK -->
+<section class="section">
+  <div class="section-label">The Land We Seek</div>
+  <h2>Specific. Non-negotiable.<br>Honest.</h2>
+  <p>We have learned — directly and recently — what happens when foundations are unclear. We are not flexible on these criteria. We are honest about them so the right landowner finds us and the wrong one does not.</p>
+  <div class="criteria-grid">
+    <div class="crit-card">
+      <span class="crit-icon">🏔</span>
+      <span class="crit-title">Climate</span>
+      <p class="crit-desc">High desert or mountain. Dry. Low mold risk. Four seasons. We have members recovering from wildfire toxins and mold exposure — this is medical, not preferential.</p>
+    </div>
+    <div class="crit-card">
+      <span class="crit-icon">💧</span>
+      <span class="crit-title">Water</span>
+      <p class="crit-desc">Clean well or water rights. Tested and documented. No known uranium, arsenic, PFAS, or industrial contamination. We will test before committing.</p>
+    </div>
+    <div class="crit-card">
+      <span class="crit-icon">📐</span>
+      <span class="crit-title">Acreage</span>
+      <p class="crit-desc">20 acres minimum. Enough for food forest, paddocks, individual private areas, communal structures, and expansion. We are building a system, not a garden.</p>
+    </div>
+    <div class="crit-card">
+      <span class="crit-icon">⚖️</span>
+      <span class="crit-title">Political</span>
+      <p class="crit-desc">Progressive or politically neutral state law. We are a diverse, neurodivergent, health-focused community. State-level policy affects our daily safety and legal standing.</p>
+    </div>
+    <div class="crit-card">
+      <span class="crit-icon">🔆</span>
+      <span class="crit-title">Solar Access</span>
+      <p class="crit-desc">South-facing exposure for passive solar structures and solar array. We build off-grid. Sun is our utility.</p>
+    </div>
+    <div class="crit-card">
+      <span class="crit-icon">📋</span>
+      <span class="crit-title">Legal Clarity</span>
+      <p class="crit-desc">Clear title. Landowner has legal authority to enter agreements. We require attorney-reviewed documentation before breaking ground on anything permanent.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem;">
+    <h3>States we are open to</h3>
+    <div class="states-row">
+      <span class="state-tag">New Mexico</span>
+      <span class="state-tag">Colorado</span>
+      <span class="state-tag">Northern Arizona</span>
+      <span class="state-tag">Eastern Oregon</span>
+      <span class="state-tag">Eastern Washington</span>
+      <span class="state-tag">Montana</span>
+      <span class="state-tag">Nevada (selected areas)</span>
+    </div>
+    <p style="margin-top:1rem;font-size:0.85rem;font-style:italic;color:var(--dim);">Priority: New Mexico and Colorado. Clean water, dry climate, politically livable, strong existing permaculture networks, reasonable land prices.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPLORE MORE -->
+<section class="section">
+  <div class="section-label">Go Deeper</div>
+  <h2>The full picture</h2>
+  <div class="nav-cards">
+    <a href="who.html" class="nav-card">
+      <span class="nc-icon">🧑‍🤝‍🧑</span>
+      <span class="nc-title">Who We Are</span>
+      <p class="nc-desc">The people, the skills, the complementary capacities that make Desert Clam more than the sum of its parts.</p>
+    </a>
+    <a href="build.html" class="nav-card">
+      <span class="nc-icon">🏗</span>
+      <span class="nc-title">What We Build</span>
+      <p class="nc-desc">The full blueprint. Structures, systems, timeline, costs, and the closed-loop diagram that shows how it all connects.</p>
+    </a>
+    <a href="land.html" class="nav-card">
+      <span class="nc-icon">🗺</span>
+      <span class="nc-title">The Land We Seek</span>
+      <p class="nc-desc">Detailed criteria, the legal structure we propose, and what a partnership with Desert Clam actually looks like on paper.</p>
+    </a>
+    <a href="covenant.html" class="nav-card">
+      <span class="nc-icon">📜</span>
+      <span class="nc-title">The Covenant</span>
+      <p class="nc-desc">Our governing document. Five values, structural principles, membership, governance. How we make decisions and how we hold each other.</p>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p class="closing-text">We are not looking for charity or rescue. We are looking for the landowner who has been wondering what to do with their acres — and is ready to find out.</p>
+  <div class="closing-name">◈ Desert Clam</div>
+</div>
+
+<footer>
+  DESERT CLAM · REGENERATIVE HEALING COMMUNITY · SEEKING LAND IN THE HIGH DESERT WEST<br><br>
+  Creativity · Growth · Land Stewardship · Beauty · Responsibility
+</footer>
+
+</body>
+</html>
